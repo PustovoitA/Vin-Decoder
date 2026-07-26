@@ -1,3 +1,14 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --border: #e0e0e0;
+  --accent: #185fa5;
+  --accent-hover: #0c447c;
+  --error: #e24b4a;
+}
+
 html, body {
   height: 100%
 }
