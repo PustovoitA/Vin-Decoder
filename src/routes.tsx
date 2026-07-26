@@ -9,7 +9,7 @@ const AppRoutes = () => {
             element: <Navigate to = "Home"/>
         },
         {
-            path: "/",
+            path: "/Home",
             element: <Home/>
         }
     ]
