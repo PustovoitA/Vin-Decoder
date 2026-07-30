@@ -1,0 +1,37 @@
+.form{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+    width: 100%;
+    font-family: Roboto;
+    position: relative;
+}
+
+.input{
+    outline: 0;
+    border: 1px solid #000;
+    border-radius: 6px;
+    padding: 0;
+    height: 100%;
+    width: calc(100% - 90px);
+    text-transform: uppercase;
+}
+
+.submit_button{
+    outline: 0;
+    border: 1px solid #000;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-block: 6px;
+    width: 80px;
+    cursor: pointer;
+}
+
+.error_massage{
+    color: var(--error);
+    width: 100%;
+    position: absolute;
+    bottom: -28px;
+    left: 1px;
+}

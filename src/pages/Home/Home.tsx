@@ -3,8 +3,8 @@ import styles from "./Home.module.css"
 
 const Home = () => {
     return (<>
-        <section className="section_home">
-            <h1>VIN Decoder</h1>
+        <section className={styles.section_home}>
+            <h1 className={styles.head}>VIN decoder</h1>
             <Form/>
         </section>
     </>)
