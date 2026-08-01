@@ -1,0 +1,17 @@
+.list{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list_item{
+    padding: 5px 10px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.secondary_text{
+    color: var(--text-secondary);
+}
