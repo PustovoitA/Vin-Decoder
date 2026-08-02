@@ -2,6 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./From.module.css"
 import { useEffect } from "react";
 import RecentSelectStore from "../../Store/RecentSelectStore";
+import RecentStore from "../../Store/RecentStore";
 
 interface InputType {
     code: string
@@ -10,6 +11,7 @@ interface InputType {
 const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{1,17}$/i;
 
 const Form = () => {
+    const resentSetValue = RecentStore((state) => state.setRecent);
     const {register, handleSubmit, formState: {errors}, setValue, watch, reset} = useForm<InputType>(
         {
             mode:"onChange",
@@ -19,6 +21,7 @@ const Form = () => {
     const onSubmit:SubmitHandler<InputType> = (data) => {
         const uperData = data.code.toUpperCase()
         console.log(uperData);
+        resentSetValue(uperData);
         reset();
     }
     const code = watch("code")
