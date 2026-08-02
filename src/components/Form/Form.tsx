@@ -1,5 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./From.module.css"
+import RecentStore from "../../Store/RecentStore";
+import { useEffect } from "react";
 
 interface InputType {
     code: string
@@ -8,13 +10,27 @@ interface InputType {
 const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{1,17}$/i;
 
 const Form = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<InputType>({mode:"onChange"})
-    const onSubmit:SubmitHandler<InputType> = (data) => console.log(data)
+    const {register, handleSubmit, formState: {errors}, setValue, watch, reset} = useForm<InputType>(
+        {
+            mode:"onChange",
+            defaultValues:{code:""}
+        }
+    )
+    const onSubmit:SubmitHandler<InputType> = (data) => {
+        console.log(data);
+        reset();
+    }
+    const code = watch("code")
+    const selectedValue = RecentStore((state) => state.selectedValue);
+    useEffect(()=>{
+        setValue("code", selectedValue);
+    }, [selectedValue]);
 
     return(<>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <input 
-            className={styles.input} 
+            <input
+            value={code}
+            className={styles.input}
             placeholder="1FTFW1CT5DFC10312" 
             type="text"
             {...register("code", {
