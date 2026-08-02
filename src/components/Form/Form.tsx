@@ -1,7 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./From.module.css"
-import RecentStore from "../../Store/RecentStore";
 import { useEffect } from "react";
+import RecentSelectStore from "../../Store/RecentSelectStore";
 
 interface InputType {
     code: string
@@ -17,11 +17,12 @@ const Form = () => {
         }
     )
     const onSubmit:SubmitHandler<InputType> = (data) => {
-        console.log(data);
+        const uperData = data.code.toUpperCase()
+        console.log(uperData);
         reset();
     }
     const code = watch("code")
-    const selectedValue = RecentStore((state) => state.selectedValue);
+    const selectedValue = RecentSelectStore((state) => state.selectedValue);
     useEffect(()=>{
         setValue("code", selectedValue);
     }, [selectedValue]);

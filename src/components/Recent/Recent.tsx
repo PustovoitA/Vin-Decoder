@@ -1,10 +1,10 @@
-import RecentStore from "../../Store/RecentStore"
+import RecentSelectStore from "../../Store/RecentSelectStore"
 import styles from "./Recent.module.css"
 
 const Recent = () => {
     const testList = ["1FTFW1CT5DFC10312", "JN1AZ4EH7DM430111", "WDDGF3BB4DF968608"]
     // const testList: string[] | [] = [];
-    const setSelectedValue = RecentStore((state) => state.setSelectedValue)
+    const setSelectedValue = RecentSelectStore((state) => state.setSelectedValue);
 
 
     return (<>
