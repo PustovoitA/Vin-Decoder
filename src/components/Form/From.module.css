@@ -10,7 +10,7 @@
 
 .input{
     outline: 0;
-    border: 1px solid #000;
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 0;
     height: 100%;
@@ -20,12 +20,19 @@
 
 .submit_button{
     outline: 0;
-    border: 1px solid #000;
+    border: 1px solid var(--border);
+    background-color: var(--bg-secondary);
     border-radius: 4px;
     font-size: 16px;
     padding-block: 6px;
     width: 80px;
     cursor: pointer;
+    transition: 300ms;
+}
+
+.submit_button:hover{
+    background-color: #dcdbdb;
+    transform: scale(1.07);
 }
 
 .error_massage{

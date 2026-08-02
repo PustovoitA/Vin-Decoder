@@ -6,10 +6,17 @@
 
 .list_item{
     padding: 5px 10px;
+    font-size: 13.4px;
     background-color: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
+    transition: 300ms;
+}
+
+.list_item:hover{
+    background-color: #dcdbdb;
+    transform: scale(1.05);
 }
 
 .secondary_text{
