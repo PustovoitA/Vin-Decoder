@@ -20,7 +20,7 @@ const Recent = () => {
                {
                 recentList.length
                 ? recentList.map(el => <span onClick={() => setSelectedValue(el)} className={styles.list_item} key={el}>{el}</span>)
-                :<span className={styles.secondary_text}>There aren't any recent ones yet.</span>
+                :<span>There aren't any recent ones yet.</span>
                }
             </div>
         </div>

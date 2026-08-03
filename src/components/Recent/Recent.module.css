@@ -3,6 +3,7 @@
     align-items: center;
     gap: 9px;
     flex-wrap: wrap;
+    color: var(--text-secondary);
 }
 
 .list_item{
@@ -18,8 +19,4 @@
 .list_item:hover{
     background-color: #dcdbdb;
     transform: scale(1.05);
-}
-
-.secondary_text{
-    color: var(--text-secondary);
 }
