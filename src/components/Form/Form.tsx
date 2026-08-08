@@ -2,6 +2,8 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./From.module.css"
 import { useEffect } from "react";
 import RecentSelectStore from "../../Store/RecentSelectStore";
+import { useDecodeVin } from "../../hooks/useDecodeVin";
+import DecodeResultsStore from "../../Store/DecodeResultsStore";
 import RecentStore from "../../Store/RecentStore";
 
 interface InputType {
@@ -17,18 +19,32 @@ const Form = () => {
             mode:"onChange",
             defaultValues:{code:""}
         }
-    )
-    const onSubmit:SubmitHandler<InputType> = (data) => {
-        const uperData = data.code.toUpperCase()
-        console.log(uperData);
-        resentSetValue(uperData);
-        reset();
-    }
+    );
+
     const code = watch("code")
     const selectedValue = RecentSelectStore((state) => state.selectedValue);
     useEffect(()=>{
         setValue("code", selectedValue);
     }, [selectedValue]);
+
+    const {mutate} = useDecodeVin();
+    const setDecodeResults = DecodeResultsStore((state) => state.setDecodeResults);
+    const error = DecodeResultsStore((state) => state.error);
+    const onSubmit:SubmitHandler<InputType> = (data) => {
+        const uperData = data.code.toUpperCase()
+        console.log(uperData);
+        mutate(uperData, {
+            onSuccess: (response) => {
+                console.log(response.Results);
+                setDecodeResults(response.Results);
+                if(!error.status) resentSetValue(uperData);
+                reset();
+            },
+            onError: (error) => {
+                console.log(error)
+            }
+        })
+    }
 
     return(<>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
