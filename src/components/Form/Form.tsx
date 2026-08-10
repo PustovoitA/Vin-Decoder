@@ -27,9 +27,15 @@ const Form = () => {
         setValue("code", selectedValue);
     }, [selectedValue]);
 
-    const {mutate} = useDecodeVin();
+    const {mutate, isPending} = useDecodeVin();
     const setDecodeResults = DecodeResultsStore((state) => state.setDecodeResults);
     const setError = DecodeResultsStore((state) => state.setError);
+    const setIsPanding = DecodeResultsStore((state) => state.setIsPanding)
+
+    useEffect(()=>{
+        setIsPanding(isPending)
+    },[isPending])
+
     const onSubmit:SubmitHandler<InputType> = (data) => {
         const upperData = data.code.toUpperCase()
         console.log(upperData);
@@ -73,7 +79,7 @@ const Form = () => {
                     message: "Enter up to 17 characters, letters and digits only"
                 }
             })} />
-            <button className={styles.submit_button} type="submit">Decode</button>
+            <button className={styles.submit_button} type="submit" disabled={isPending}>Decode</button>
             {errors.code?.message &&
             (<span className={styles.error_massage}>
                 {errors.code.message}

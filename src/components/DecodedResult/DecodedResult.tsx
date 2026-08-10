@@ -1,14 +1,21 @@
 import DecodeResultsStore from "../../Store/DecodeResultsStore"
 import styles from "./DecodedResult.module.css"
 
+import { InlineLoader } from "generative-loaders";
+import "generative-loaders/styles.css";
+
+
 const DecodedResult = () => {
     const data = DecodeResultsStore((state) => state.data);
     const error = DecodeResultsStore((state) => state.error);
+    const isPanding = DecodeResultsStore((state) => state.isPending);
 
     return(<>
         <section className={styles.container}>
             <p className={styles.title}>Decoded result</p>
-            { data.length
+            { isPanding
+            ? <InlineLoader variant="signal" size={24} />
+            : data.length
             ? <ul className={styles.list}>
                 {error.status 
                 ? <div className={styles.warning_block}>
