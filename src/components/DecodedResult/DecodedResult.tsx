@@ -16,7 +16,7 @@ const DecodedResult = () => {
                     <p className={styles.warning_block_message}>{error.message}</p>
                 </div>
                 : null}
-                {data.map(result => <li key={result.VariableId}>
+                {data.map(result => <li key={`${result.VariableId}-${result.Value}`}>
                     <div className={styles.list_item}>
                         <p style={{
                             color: "var(--text-secondary)",
