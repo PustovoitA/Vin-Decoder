@@ -29,15 +29,24 @@ const Form = () => {
 
     const {mutate} = useDecodeVin();
     const setDecodeResults = DecodeResultsStore((state) => state.setDecodeResults);
-    const error = DecodeResultsStore((state) => state.error);
+    const setError = DecodeResultsStore((state) => state.setError);
     const onSubmit:SubmitHandler<InputType> = (data) => {
-        const uperData = data.code.toUpperCase()
-        console.log(uperData);
-        mutate(uperData, {
+        const upperData = data.code.toUpperCase()
+        console.log(upperData);
+        mutate(upperData, {
             onSuccess: (response) => {
-                console.log(response.Results);
+                const errorField = response.Results.find(el => el.Variable === "Error Code");
+                const errorCode = errorField ? Number(errorField.Value) : null;
+
+                if (errorCode !== 0 && errorCode !== null) {
+                    const errorTextField = response.Results.find(el => el.Variable === "Error Text");
+                    setError(true, errorTextField?.Value ?? "VIN decoded with warnings");
+                } else {
+                    setError(false, "");
+                }
+
                 setDecodeResults(response.Results);
-                if(!error.status) resentSetValue(uperData);
+                resentSetValue(upperData);
                 reset();
             },
             onError: (error) => {

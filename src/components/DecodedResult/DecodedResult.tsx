@@ -8,10 +8,14 @@ const DecodedResult = () => {
     return(<>
         <section className={styles.container}>
             <p className={styles.title}>Decoded result</p>
-            {error.status 
-            ? <p>{error.message}</p>
-            : data.length
+            { data.length
             ? <ul className={styles.list}>
+                {error.status 
+                ? <div className={styles.warning_block}>
+                    <span className={styles.warning_block_title}>Warning <span className="material-symbols-outlined">warning</span></span>
+                    <p className={styles.warning_block_message}>{error.message}</p>
+                </div>
+                : null}
                 {data.map(result => <li key={result.VariableId}>
                     <div className={styles.list_item}>
                         <p style={{
