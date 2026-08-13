@@ -42,3 +42,48 @@
     bottom: -28px;
     left: 1px;
 }
+
+/* ===== Мобильные: 480px и меньше ===== */
+@media (max-width: 480px) {
+    .form{
+        flex-direction: column;
+        align-items: stretch;
+        height: auto;
+        gap: 10px;
+    }
+
+    .input{
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+        font-size: 16px; /* важно: не меньше 16px, иначе Safari на iOS зумит страницу при фокусе */
+        box-sizing: border-box;
+    }
+
+    .submit_button{
+        width: 100%;
+        height: 40px;
+        padding-block: 0;
+    }
+
+    .submit_button:hover{
+        transform: none; /* scale на мобиле смысла не имеет, только мешает touch-таргету */
+    }
+
+    .error_massage{
+        position: static;
+        bottom: unset;
+        left: unset;
+        display: block;
+        margin-top: 4px;
+        font-size: 13px;
+    }
+}
+
+/* ===== Очень узкие экраны: от 420px (минимум по заданию) ===== */
+@media (max-width: 420px) {
+    .input,
+    .submit_button{
+        height: 38px;
+    }
+}
