@@ -6,8 +6,9 @@
     gap: 20px;
     width: 100%;
     padding: 20px;
-    max-width: 500px;
+    max-width: 540px;
     font-family: Roboto;
+    box-sizing: border-box; 
 }
 .head{
     font-size: 45px;
