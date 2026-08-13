@@ -23,7 +23,6 @@ const DecodeResultsStore = create<DecodeResultType>()(
                 const filteredData = data?.filter(el => el.Value !== null && el.Value !== "" && !diagnosticFields.includes(el.Variable)) ?? [];
                 
                 set(() => {
-                    console.log(filteredData)
                     return{data: [... filteredData]}
                 })
             },

@@ -5,6 +5,7 @@
     justify-content: start;
     gap: 20px;
     width: 100%;
+    padding: 20px;
     max-width: 500px;
     font-family: Roboto;
 }

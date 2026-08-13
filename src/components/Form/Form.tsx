@@ -38,7 +38,6 @@ const Form = () => {
 
     const onSubmit:SubmitHandler<InputType> = (data) => {
         const upperData = data.code.toUpperCase()
-        console.log(upperData);
         mutate(upperData, {
             onSuccess: (response) => {
                 const errorField = response.Results.find(el => el.Variable === "Error Code");

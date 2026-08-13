@@ -19,7 +19,6 @@ const RecentStore = create<RecentStoreType>()(
                 let localRecent = get().recent;
                 const localMaxLength = get().maxLengthRecent;
                 const deleteSelectedItem = get().deleteSelectedItem;
-                // const setRecent = get().setRecent;
 
                 if(localRecent.includes(item)){
                     deleteSelectedItem(item);
