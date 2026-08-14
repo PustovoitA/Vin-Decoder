@@ -1,75 +1,83 @@
-# React + TypeScript + Vite
+# VIN Decoder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page application for decoding Vehicle Identification Numbers (VIN) and viewing detailed vehicle information. Built as a portfolio project to demonstrate a modern React + TypeScript workflow: server-state management, form validation, client-side routing, and persisted local state.
 
-Currently, two official plugins are available:
+**Live demo:** https://vin-decoder-ruddy.vercel.app  
+**Repository:** https://github.com/PustovoitA/Vin-Decoder
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🔍 **VIN lookup** — enter a 17-character VIN and get decoded vehicle data (make, model, year, and more)
+- ✅ **Real-time form validation** — instant feedback on VIN format via `react-hook-form`
+- 🕓 **Search history** — the last 3 lookups are saved locally and persist across sessions
+- ⚡ **Async state handling** — loading, error, and success states managed with TanStack Query
+- 🧭 **Client-side routing** — nested layouts and a 404 fallback via React Router v7
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+| Category | Technology |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build tool | Vite |
+| Server state | TanStack Query (`useQuery`, `useMutation`) |
+| Client state | Zustand (with `persist` middleware) |
+| Forms & validation | React Hook Form |
+| Routing | React Router v7 (`createBrowserRouter`, Layout/Outlet) |
+| Linting | ESLint + typescript-eslint |
+| Deployment | Vercel |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How It Works
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. The user enters a VIN into a validated input field.
+2. On submit, a mutation request is sent via TanStack Query to decode the VIN.
+3. The result is displayed, and the query is added to a history list capped at 3 entries.
+4. History is persisted to local storage using Zustand's `persist` middleware, so it survives page reloads.
+5. Failed requests are handled gracefully and do **not** pollute the search history.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
 
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/PustovoitA/Vin-Decoder.git
+cd Vin-Decoder
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The app will be available at `http://localhost:5173`.
+
+### Build for production
+
+```bash
+npm run build
+npm run preview
+```
+
+## Project Structure
 
 ```
+src/
+├── components/     # Reusable UI components
+├── pages/          # Route-level components
+├── store/          # Zustand store (VIN history)
+├── hooks/          # Custom hooks / TanStack Query hooks
+├── types/          # TypeScript types
+└── router/         # React Router configuration
+```
+
+## Author
+
+**Andrii Pustovoit**  
+Frontend Developer | React / TypeScript  
+[LinkedIn](https://linkedin.com/in/andrii-pustovoit-0b6176358) · [GitHub](https://github.com/PustovoitA)
