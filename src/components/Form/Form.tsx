@@ -13,7 +13,7 @@ interface InputType {
 const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{1,17}$/i;
 
 const Form = () => {
-    const resentSetValue = RecentStore((state) => state.setRecent);
+    // form setup
     const {register, handleSubmit, formState: {errors}, setValue, watch, reset} = useForm<InputType>(
         {
             mode:"onChange",
@@ -21,21 +21,26 @@ const Form = () => {
         }
     );
 
+    //seting selected value
     const code = watch("code")
     const selectedValue = RecentSelectStore((state) => state.selectedValue);
     useEffect(()=>{
         setValue("code", selectedValue);
     }, [selectedValue]);
 
+    //stors and custom hook functions
     const {mutate, isPending} = useDecodeVin();
     const setDecodeResults = DecodeResultsStore((state) => state.setDecodeResults);
     const setError = DecodeResultsStore((state) => state.setError);
-    const setIsPanding = DecodeResultsStore((state) => state.setIsPanding)
+    const setIsPanding = DecodeResultsStore((state) => state.setIsPanding);
+    const recentSetValue = RecentStore((state) => state.setRecent);
 
+    //seting panding state
     useEffect(()=>{
         setIsPanding(isPending)
-    },[isPending])
+    },[isPending]);
 
+    //request and response processing with useMutation(TanStack Query)
     const onSubmit:SubmitHandler<InputType> = (data) => {
         const upperData = data.code.toUpperCase()
         mutate(upperData, {
@@ -51,7 +56,7 @@ const Form = () => {
                 }
 
                 setDecodeResults(response.Results);
-                resentSetValue(upperData);
+                recentSetValue(upperData);
                 reset();
             },
             onError: (error) => {
