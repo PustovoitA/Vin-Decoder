@@ -5,9 +5,11 @@ import type { DecodeVinResult } from "../types/DecodeVinResponse";
 interface DecodeResultType {
     data: DecodeVinResult[],
     error: {status: boolean, message: string},
+    warning: {status: boolean, message: string},
     isPending: boolean,
     setDecodeResults: (data: DecodeVinResult[]) => void,
     setError: (status: boolean, message: string) => void,
+    setWarning: (status: boolean, message: string) => void,
     setIsPanding: (value: boolean) => void
 }
 
@@ -16,6 +18,7 @@ const DecodeResultsStore = create<DecodeResultType>()(
         (set) => ({
             data:[],
             error:{status: false, message: ""},
+            warning:{status:false, message: ""},
             isPending: false,
 
             setDecodeResults: (data) => {
@@ -30,6 +33,12 @@ const DecodeResultsStore = create<DecodeResultType>()(
             setError: (status, message) => {
                 set(() => {
                     return{error: {status: status, message: message}}
+                })
+            },
+
+            setWarning: (status, message) => {
+                set(() => {
+                    return{warning: {status: status, message: message}}
                 })
             },
 
