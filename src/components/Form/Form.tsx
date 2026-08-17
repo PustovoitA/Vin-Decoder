@@ -65,7 +65,7 @@ const Form = () => {
                 reset();
             },
             onError: (error) => {
-                setError(true,`something is wrong: ${error}`);
+                setError(true,`something is wrong: ${error.message}`);
             }
         })
     }

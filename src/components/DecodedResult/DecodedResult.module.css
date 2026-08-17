@@ -31,7 +31,7 @@
     gap: 50px;
 }
 
-.warning_block{
+.warning_block, .error_block{
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -40,16 +40,19 @@
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 15px;
-    background-color: #f6a80066;
     color: #000000c4;
 }
 
-.warning_block_title{
+.warning_block{background-color: #f6a80066;}
+
+.error_block{background-color: #F6303066;}
+
+.warning_block_title, .error_block_title{
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.warning_block_message{
+.warning_block_message, .error_block_message{
     margin-top: 0;
 }
 

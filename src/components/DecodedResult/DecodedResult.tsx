@@ -18,10 +18,17 @@ const DecodedResult = () => {
             ? <InlineLoader variant="signal" size={24} />
             : data.length
             ? <ul className={styles.list}>
+                {error.status 
+                ? <div className={styles.error_block}>
+                    <span className={styles.error_block_title}>Error <span className="material-symbols-outlined">error</span></span>
+                    <p className={styles.error_block_message}>{error.message}</p>
+                </div>
+                : null}
+
                 {warning.status 
                 ? <div className={styles.warning_block}>
                     <span className={styles.warning_block_title}>Warning <span className="material-symbols-outlined">warning</span></span>
-                    <p className={styles.warning_block_message}>{error.message}</p>
+                    <p className={styles.warning_block_message}>{warning.message}</p>
                 </div>
                 : null}
                 {data.map(result => <li key={`${result.VariableId}-${result.Value}`}>
