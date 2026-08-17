@@ -8,6 +8,7 @@ import "generative-loaders/styles.css";
 const DecodedResult = () => {
     const data = DecodeResultsStore((state) => state.data);
     const error = DecodeResultsStore((state) => state.error);
+    const warning = DecodeResultsStore((state) => state.warning);
     const isPanding = DecodeResultsStore((state) => state.isPending);
 
     return(<>
@@ -17,7 +18,7 @@ const DecodedResult = () => {
             ? <InlineLoader variant="signal" size={24} />
             : data.length
             ? <ul className={styles.list}>
-                {error.status 
+                {warning.status 
                 ? <div className={styles.warning_block}>
                     <span className={styles.warning_block_title}>Warning <span className="material-symbols-outlined">warning</span></span>
                     <p className={styles.warning_block_message}>{error.message}</p>
