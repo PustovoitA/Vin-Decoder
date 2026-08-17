@@ -21,7 +21,7 @@ const DecodedResult = () => {
                 {warning.status 
                 ? <div className={styles.warning_block}>
                     <span className={styles.warning_block_title}>Warning <span className="material-symbols-outlined">warning</span></span>
-                    <p className={styles.warning_block_message}>{error.message}</p>
+                    <p className={styles.warning_block_message}>{warning.message}</p>
                 </div>
                 : null}
                 {data.map(result => <li key={`${result.VariableId}-${result.Value}`}>
