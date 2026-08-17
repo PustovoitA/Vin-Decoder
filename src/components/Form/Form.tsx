@@ -34,6 +34,7 @@ const Form = () => {
     const {mutate, isPending} = useDecodeVin();
     const setDecodeResults = DecodeResultsStore((state) => state.setDecodeResults);
     const setError = DecodeResultsStore((state) => state.setError);
+    const setWarning = DecodeResultsStore((state) => state.setWarning);
     const setIsPanding = DecodeResultsStore((state) => state.setIsPanding);
     const recentSetValue = RecentStore((state) => state.setRecent);
 
@@ -47,14 +48,16 @@ const Form = () => {
         const upperData = data.code.toUpperCase()
         mutate(upperData, {
             onSuccess: (response) => {
+                setError(false,"")
+
                 const errorField = response.Results.find(el => el.Variable === "Error Code");
                 const errorCode = errorField ? Number(errorField.Value) : null;
 
                 if (errorCode !== 0 && errorCode !== null) {
                     const errorTextField = response.Results.find(el => el.Variable === "Error Text");
-                    setError(true, errorTextField?.Value ?? "VIN decoded with warnings");
+                    setWarning(true, errorTextField?.Value ?? "VIN decoded with warnings");
                 } else {
-                    setError(false, "");
+                    setWarning(false, "");
                 }
 
                 setDecodeResults(response.Results);
@@ -62,7 +65,7 @@ const Form = () => {
                 reset();
             },
             onError: (error) => {
-                setError(true,`something is wrong: ${error}`)
+                setError(true,`something is wrong: ${error.message}`);
             }
         })
     }
