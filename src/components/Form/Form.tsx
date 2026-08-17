@@ -1,10 +1,13 @@
-import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./From.module.css"
-import { useEffect } from "react";
-import RecentSelectStore from "../../Store/RecentSelectStore";
+
+import { useForm, type SubmitHandler } from "react-hook-form"
 import { useDecodeVin } from "../../hooks/useDecodeVin";
-import DecodeResultsStore from "../../Store/DecodeResultsStore";
+import { useEffect } from "react";
+
+import RecentSelectStore from "../../Store/RecentSelectStore";
 import RecentStore from "../../Store/RecentStore";
+import DecodeResultsStore from "../../Store/DecodeResultsStore";
+
 
 interface InputType {
     code: string
@@ -14,7 +17,7 @@ const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{1,17}$/i;
 
 const Form = () => {
     // form setup
-    const {register, handleSubmit, formState: {errors}, setValue, watch, reset} = useForm<InputType>(
+    const {register, handleSubmit, formState: {errors}, setValue, reset} = useForm<InputType>(
         {
             mode:"onChange",
             defaultValues:{code:""}
@@ -22,7 +25,6 @@ const Form = () => {
     );
 
     //seting selected value
-    const code = watch("code")
     const selectedValue = RecentSelectStore((state) => state.selectedValue);
     useEffect(()=>{
         setValue("code", selectedValue);
@@ -60,7 +62,7 @@ const Form = () => {
                 reset();
             },
             onError: (error) => {
-                console.log(error)
+                setError(true,`something is wrong: ${error}`)
             }
         })
     }
@@ -68,7 +70,6 @@ const Form = () => {
     return(<>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <input
-            value={code}
             className={styles.input}
             placeholder="1FTFW1CT5DFC10312" 
             type="text"
