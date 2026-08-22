@@ -15,7 +15,7 @@ const AppRoutes = () => {
         },
         {
             path: "Variables",
-            elenemt: <Variables/>
+            element: <Variables/>
         }
     ]
 
