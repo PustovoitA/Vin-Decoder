@@ -1,0 +1,18 @@
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: 1px solid var(--border);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    font-family: Roboto;
+    cursor: pointer;
+}
+.nav{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    list-style-type: none;
+
+}

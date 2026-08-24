@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home/Home"
+import Variables from "./pages/Variables/Variables"
 
 
 const AppRoutes = () => {
@@ -11,6 +12,10 @@ const AppRoutes = () => {
         {
             path: "Home",
             element: <Home/>
+        },
+        {
+            path: "Variables",
+            element: <Variables/>
         }
     ]
 
