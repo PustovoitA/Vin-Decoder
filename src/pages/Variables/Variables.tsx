@@ -1,7 +1,10 @@
+import styles from "./Variables.module.css"
+
 import { useMemo } from "react";
 import { useVariablesList } from "../../hooks/useVariablesList";
-import styles from "./Variables.module.css"
+
 import type { VariavlesListResults } from "../../types/VariablesListResponse";
+
 import DOMPurify from 'dompurify';
 
 const Variables = () => {
@@ -29,24 +32,27 @@ const Variables = () => {
         <section className={styles.container}>
             <h1 className={styles.head}>Variables</h1>
             {[...variablesByGroup.entries()].map(([groupName, variable]) => (
-                <div key={groupName}>
-                    <h2>{groupName}</h2>
-                    <div>
+                <div key={groupName} className={styles.group}>
+                    <h2 className={styles.groupTitle}>{groupName}</h2>
+                    <ul className={styles.list}>
                         {variable.map((el) => (
-                            <li key={el.ID}>
-                                <div>
-                                    <div>
-                                        <span>{el.Name}</span>
-                                        <span>#{el.ID}</span>
+                            <li key={el.ID} className={styles.card}>
+                                <div className={styles.cardHeader}>
+                                    <div className={styles.cardTitleRow}>
+                                        <span className={styles.cardName}>{el.Name}</span>
+                                        <span className={styles.cardId}>#{el.ID}</span>
                                     </div>
-                                    <div>{el.DataType}</div>
+                                    <span className={`${styles.badge} ${styles[el.DataType]}`}>
+                                        {el.DataType}
+                                    </span>
                                 </div>
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }} />
-                                </div>
+                                <div
+                                    className={styles.description}
+                                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }}
+                                />
                             </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             ))}
         </section>
