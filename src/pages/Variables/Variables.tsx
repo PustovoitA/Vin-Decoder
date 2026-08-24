@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useVariablesList } from "../../hooks/useVariablesList";
 import styles from "./Variables.module.css"
 import type { VariavlesListResults } from "../../types/VariablesListResponse";
+import DOMPurify from 'dompurify';
 
 const Variables = () => {
     const {data} = useVariablesList();
@@ -41,7 +42,7 @@ const Variables = () => {
                                     <div>{el.DataType}</div>
                                 </div>
                                 <div>
-                                    <p>{el.Description}</p>
+                                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }} />
                                 </div>
                             </li>
                         ))}
