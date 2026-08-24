@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    max-width: 540px;
+    font-family: Roboto;
+    box-sizing: border-box; 
+}
+
+.head{
+    font-size: 45px;
+    margin: 0;
+}
