@@ -1,5 +1,9 @@
-import DecodeResultsStore from "../../Store/DecodeResultsStore"
 import styles from "./DecodedResult.module.css"
+
+import Warning from "../../ui/Warning/Warning";
+import Error from "../../ui/Error/Error";
+
+import DecodeResultsStore from "../../Store/DecodeResultsStore"
 
 import { InlineLoader } from "generative-loaders";
 import "generative-loaders/styles.css";
@@ -19,17 +23,11 @@ const DecodedResult = () => {
             : data.length
             ? <ul className={styles.list}>
                 {error.status 
-                ? <div className={styles.error_block}>
-                    <span className={styles.error_block_title}>Error <span className="material-symbols-outlined">error</span></span>
-                    <p className={styles.error_block_message}>{error.message}</p>
-                </div>
+                ? <Error message={error.message}/>
                 : null}
 
                 {warning.status 
-                ? <div className={styles.warning_block}>
-                    <span className={styles.warning_block_title}>Warning <span className="material-symbols-outlined">warning</span></span>
-                    <p className={styles.warning_block_message}>{warning.message}</p>
-                </div>
+                ? <Warning message={warning.message}/>
                 : null}
                 {data.map(result => <li key={`${result.VariableId}-${result.Value}`}>
                     <div className={styles.list_item}>

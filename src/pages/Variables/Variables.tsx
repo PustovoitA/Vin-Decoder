@@ -1,5 +1,7 @@
 import styles from "./Variables.module.css"
 
+import Error from "../../ui/Error/Error";
+
 import { useMemo } from "react";
 import { useVariablesList } from "../../hooks/useVariablesList";
 
@@ -35,7 +37,7 @@ const Variables = () => {
         <section className={styles.container}>
             <h1 className={styles.head}>Variables</h1>
             {isError
-            ? <p>ERROR</p>
+            ? <Error message="Something was wrong, try later"/>
             : isLoading
             ? <InlineLoader variant="signal" size={24} />
             :   [...variablesByGroup.entries()].map(([groupName, variable]) => (
