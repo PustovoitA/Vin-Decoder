@@ -5,10 +5,13 @@ import { useVariablesList } from "../../hooks/useVariablesList";
 
 import type { VariavlesListResults } from "../../types/VariablesListResponse";
 
+import { InlineLoader } from "generative-loaders";
+import "generative-loaders/styles.css";
+
 import DOMPurify from 'dompurify';
 
 const Variables = () => {
-    const {data} = useVariablesList();
+    const {data, isError, isLoading} = useVariablesList();
 
     const variablesByGroup = useMemo( () => {
         const results = data?.Results
@@ -31,30 +34,35 @@ const Variables = () => {
     return (<>
         <section className={styles.container}>
             <h1 className={styles.head}>Variables</h1>
-            {[...variablesByGroup.entries()].map(([groupName, variable]) => (
-                <div key={groupName} className={styles.group}>
-                    <h2 className={styles.groupTitle}>{groupName}</h2>
-                    <ul className={styles.list}>
-                        {variable.map((el) => (
-                            <li key={el.ID} className={styles.card}>
-                                <div className={styles.cardHeader}>
-                                    <div className={styles.cardTitleRow}>
-                                        <span className={styles.cardName}>{el.Name}</span>
-                                        <span className={styles.cardId}>#{el.ID}</span>
+            {isError
+            ? <p>ERROR</p>
+            : isLoading
+            ? <InlineLoader variant="signal" size={24} />
+            :   [...variablesByGroup.entries()].map(([groupName, variable]) => (
+                    <div key={groupName} className={styles.group}>
+                        <h2 className={styles.groupTitle}>{groupName}</h2>
+                        <ul className={styles.list}>
+                            {variable.map((el) => (
+                                <li key={el.ID} className={styles.card}>
+                                    <div className={styles.cardHeader}>
+                                        <div className={styles.cardTitleRow}>
+                                            <span className={styles.cardName}>{el.Name}</span>
+                                            <span className={styles.cardId}>#{el.ID}</span>
+                                        </div>
+                                        <span className={`${styles.badge} ${styles[el.DataType]}`}>
+                                            {el.DataType}
+                                        </span>
                                     </div>
-                                    <span className={`${styles.badge} ${styles[el.DataType]}`}>
-                                        {el.DataType}
-                                    </span>
-                                </div>
-                                <div
-                                    className={styles.description}
-                                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }}
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+                                    <div
+                                        className={styles.description}
+                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
         </section>
     </>)
 }
