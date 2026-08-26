@@ -35,6 +35,12 @@ const Variables = () => {
         return variablesByGroup
     }, [data]);
 
+    const truncateWords = (str: string, maxWords: number): string =>{
+        const words = str.split(' ');
+        if(words.length < maxWords) return str
+        return words.slice(0, maxWords).join(' ') + "..."
+    }
+
     return (<>
         <section className={styles.container}>
             <h1 className={styles.head}>Variables</h1>
@@ -59,7 +65,7 @@ const Variables = () => {
                                     </div>
                                     <div
                                         className={styles.description}
-                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(el.Description) }}
+                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateWords(el.Description, 20)) }}
                                     />
                                 </li>
                             ))}

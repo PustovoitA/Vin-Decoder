@@ -73,6 +73,7 @@ src/
 ├── store/          # Zustand store (VIN history)
 ├── hooks/          # Custom hooks / TanStack Query hooks
 ├── types/          # TypeScript types
+├── ui/             # Ui components
 └── router/         # React Router configuration
 ```
 
