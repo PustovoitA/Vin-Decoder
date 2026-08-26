@@ -1,0 +1,165 @@
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  font-family: Roboto;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.back:hover {
+  color: #333;
+}
+
+.groupLabel {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 6px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.id {
+  font-size: 13px;
+  color: #999;
+  margin: 0 0 20px;
+}
+
+.badge {
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.lookup {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.string {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.int {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.decimal {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.descriptionBlock {
+  background: #fafafa;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 28px;
+}
+
+.descriptionLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin: 0 0 8px;
+}
+
+.descriptionBlock p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.descriptionBlock p:last-child {
+  margin-bottom: 0;
+}
+
+.descriptionBlock ul {
+  margin: 4px 0 10px 20px;
+}
+
+.descriptionBlock li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.relatedLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin: 0 0 10px;
+}
+
+.relatedList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.relatedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 150ms;
+}
+
+.relatedItem:hover {
+  background-color: #f3f3f3;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 12px 48px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .descriptionBlock {
+    padding: 14px;
+  }
+
+  .relatedItem {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
