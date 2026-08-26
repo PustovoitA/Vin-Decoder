@@ -4,6 +4,7 @@ import Error from "../../ui/Error/Error";
 
 import { useMemo } from "react";
 import { useVariablesList } from "../../hooks/useVariablesList";
+import { useNavigate } from "react-router-dom";
 
 import type { VariavlesListResults } from "../../types/VariablesListResponse";
 
@@ -14,6 +15,7 @@ import DOMPurify from 'dompurify';
 
 const Variables = () => {
     const {data, isError, isLoading} = useVariablesList();
+    const navigation = useNavigate()
 
     const variablesByGroup = useMemo( () => {
         const results = data?.Results
@@ -45,7 +47,7 @@ const Variables = () => {
                         <h2 className={styles.groupTitle}>{groupName}</h2>
                         <ul className={styles.list}>
                             {variable.map((el) => (
-                                <li key={el.ID} className={styles.card}>
+                                <li onClick={() => {navigation(`/Variables/${el.ID}`)}} key={el.ID} className={styles.card}>
                                     <div className={styles.cardHeader}>
                                         <div className={styles.cardTitleRow}>
                                             <span className={styles.cardName}>{el.Name}</span>
